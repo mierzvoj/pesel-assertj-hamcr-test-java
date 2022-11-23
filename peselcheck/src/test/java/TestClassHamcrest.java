@@ -47,7 +47,7 @@ public class TestClassHamcrest {
     @Test
     public void peselToStringAndCorrect() {
         Pesel pes = pesel;
-        String str = pes.toString();
+        String str = pesel.getPesel();
         assertThat(pes, hasToString(str));
     }
 
