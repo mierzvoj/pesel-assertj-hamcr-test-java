@@ -6,15 +6,23 @@ import java.util.List;
 import java.util.List;
 
 public class Pesel {
-    private String pesel;
-
+    private final String pesel;
+    String century = this.century;
+    List<String> myList;
 
     public Pesel(String pesel) {
         this.pesel = pesel;
+        this.century = century;
+    }
+
+    public List<String> peseLlAsList(){
+        return myList = new ArrayList<String>(Arrays.asList(pesel.split("")));
+
     }
 
     public boolean isPeselValid() {
         String pesel = this.pesel;
+
 
         int lastDigit = Integer.parseInt(pesel.substring(10, 11));
         int A1 = Integer.parseInt(pesel.substring(0, 1));
@@ -28,7 +36,7 @@ public class Pesel {
         int I9 = Integer.parseInt(pesel.substring(8, 9));
         int J10 = Integer.parseInt(pesel.substring(9, 10));
 
-        int sum = 9 * A1 + 7 * B2 + 3 * C3 + 1 * D4 + 9 * E5 + 7 * F6 + 3 * G7 + 1 * H8 + 9 * I9 + 7 * J10;
+        int sum = 9 * A1 + 7 * B2 + 3 * C3 + D4 + 9 * E5 + 7 * F6 + 3 * G7 + H8 + 9 * I9 + 7 * J10;
 
         if (sum % 10 == lastDigit) {
             System.out.println("Valid PESEL");
@@ -39,14 +47,14 @@ public class Pesel {
         }
     }
 
-    public List<String> breakDownPeselToCheck() {
+    public String breakDownPeselToCheck() {
 
         if (isPeselValid()) {
             List<String> listOfData = new ArrayList();
             Integer monthOfBirthFromPesel = Integer.parseInt(pesel.substring(2, 4));
             Integer centuryOfBirthYear = monthOfBirthFromPesel / 20;
-            Integer monthOfBirth = monthOfBirthFromPesel - (centuryOfBirthYear * 20);
-            String century = null;
+
+
             switch (centuryOfBirthYear) {
                 case 0:
                     century = "19";
@@ -65,30 +73,35 @@ public class Pesel {
                     break;
             }
 
-            String yearOfBirth = century + pesel.substring(0, 2);
-
-            String dayOfBirth = pesel.substring(4, 6);
-
-            System.out.printf("Birth Year: %s\n", yearOfBirth);
-            System.out.printf("Month of Birth: %02d\n", monthOfBirth);
-            System.out.printf("Day of Birth: %s\n", dayOfBirth);
-            System.out.printf("Sex: %s\n", maleOrFemale());
-            String monthOfBirthString = Integer.toString(monthOfBirth);
-            listOfData.add(yearOfBirth);
-            listOfData.add(monthOfBirthString);
-            listOfData.add(dayOfBirth);
-            System.out.println(Arrays.toString(listOfData.toArray()));
-            return listOfData;
-        } else {
-            System.out.println("Checksum Inproper");
         }
-        return null;
+        return century;
     }
+
+    public String yearOfBirth() {
+        String yearOfBirth = pesel.substring(0, 2);
+        System.out.printf("Birth Year: %s\n", yearOfBirth);
+        return yearOfBirth;
+    }
+
+    public Integer monthOfBirth() {
+        Integer monthOfBirthFromPesel = Integer.parseInt(pesel.substring(2, 4));
+        Integer centuryOfBirthYear = monthOfBirthFromPesel / 20;
+        Integer monthOfBirth = monthOfBirthFromPesel - (centuryOfBirthYear * 20);
+        System.out.printf("Month of Birth: %s\n", monthOfBirth);
+        return monthOfBirth;
+    }
+
+    public String dayOfBirth() {
+        String dayOfBirth = pesel.substring(4, 6);
+        System.out.printf("Day of Birth: %s\n", dayOfBirth);
+        return dayOfBirth;
+    }
+
 
     public String maleOrFemale() {
         if (isPeselValid()) {
-            int plec = Integer.parseInt(pesel.substring(9, 10));
-            if (plec % 2 == 0 || plec == 0) {
+            int sex = Integer.parseInt(pesel.substring(9, 10));
+            if (sex % 2 == 0 || sex == 0) {
                 return "female";
             } else {
                 return "male";
@@ -100,5 +113,9 @@ public class Pesel {
 
     public String getPesel() {
         return pesel;
+    }
+
+    public int peselLenght(){
+        return pesel.length();
     }
 }
