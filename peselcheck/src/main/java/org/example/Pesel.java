@@ -118,4 +118,11 @@ public class Pesel {
     public int peselLenght(){
         return pesel.length();
     }
+
+    @Override
+    public String toString() {
+        return pesel;
+    }
 }
+
+
