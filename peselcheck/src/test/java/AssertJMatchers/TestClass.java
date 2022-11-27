@@ -15,7 +15,7 @@ public class TestClass {
 
     @Test
     public void peselGenderCheck(){
-        Pesel pesel = new Pesel("65071209862");
-        assertThat(pesel).customAssertionGenderCheck("female");
+        Pesel pesel1 = new Pesel("65071209862");
+        assertThat(pesel1).customAssertionGenderCheck(pesel1);
     }
 }

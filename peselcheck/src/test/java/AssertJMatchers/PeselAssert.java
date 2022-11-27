@@ -10,8 +10,7 @@ import static jdk.dynalink.linker.support.Guards.isNotNull;
 //Assertj custom matchers
 public class PeselAssert extends AbstractAssert<PeselAssert, Pesel> {
 
-    Pesel pesel = new Pesel("65071209862");
-
+    Pesel pesel = new Pesel("");
     public PeselAssert(Pesel actual) {
         super(actual, PeselAssert.class);
     }
@@ -34,8 +33,8 @@ public class PeselAssert extends AbstractAssert<PeselAssert, Pesel> {
     }
 
 
-    public PeselAssert customAssertionGenderCheck(String gender) {
-        gender.equals("male");
+    public PeselAssert customAssertionGenderCheck(Pesel pesel) {
+        String gender = "female";
         isNotNull();
         if (!pesel.maleOrFemale().equals(gender)) {
             failWithMessage("Expected person to have gender %s but was %s",
